@@ -1,0 +1,2 @@
+#$('#notice').html('<%= flash[:notice].html_safe %>');
+$(".comments").append("<%= escape_javascript(render(@comment)) %>")

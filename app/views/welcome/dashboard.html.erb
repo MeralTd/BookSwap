@@ -1,0 +1,50 @@
+<head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head> 
+
+<body>
+  <h1>Shared Books</h1>
+  
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Aouther</th>
+        <th>Pagecount</th>
+        <th>User Name</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @books.each do |book| %>
+        <tr>
+          <td><%= book.title %></td>
+          <td><%= book.aouther %></td>
+          <td><%= book.pagecount %></td>
+          <td><%= book.status_type %></td>
+          <td><button class="button button1"><%= link_to 'Show', book %></button></td>
+          <td><button class="button button2"><%= link_to 'Edit', edit_book_path(book) %></button></td>
+          <td><button class="button button3"><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
+          <td><button class="button button1"><%= link_to 'Comments', book_comments_path(book) %></button></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <%= link_to '<button class="btn success" >New Book</button>'.html_safe, new_book_path %>
+  <br>
+  <div>
+    <br>
+    <% @books.each do |book| %>
+      <% if  book.try(:user).try(:email) == current_user.email %>
+        <% book.comments.unapproved.each do |comment| %>
+          <%= link_to "#{comment.try(:user).try(:user_name)} wrote a comment your #{comment.try(:book).try(:title)} book. Click here to accept it", book_comments_path(book), class: "button alert small"%> <br>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</body>

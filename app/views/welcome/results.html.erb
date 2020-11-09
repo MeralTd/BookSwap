@@ -1,0 +1,22 @@
+<div class="page-header">
+    <div class="profile_name">Search Results</div>
+</div>
+
+<div class="text">
+<% if @books.present? %>
+    <% @books.each do |book| %>
+      <div class="user">
+        <div class="row">
+          <div style="padding-top:1em;text-align:left;">
+            <strong><%= link_to book.title, book_path(book.id) %></strong>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+    <% end %>
+
+<% else %>
+  <p>There are no books containing the term(s) <%= params[:search] %>.</p>
+<% end %>
+</div>

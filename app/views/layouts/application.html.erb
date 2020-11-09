@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BookApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script><%=render :file => "layouts/alert.js"%></script>
+
+  </head>
+  
+  <body>
+    <ul>
+      <% if user_signed_in? %>
+        <div class="navbar">
+          <a class="active" <%= link_to 'SWAP BOOK', root_path %></a>
+
+          <div class="dropdown", style="float:right">
+            <button class="dropbtn">
+              Welcome <%= current_user.user_name %>
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="/show/<%= current_user.id%>">Profile</a>
+              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'clr' %>
+              <%= link_to 'Dashboard', dashboard_path %>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+            </div>
+          </div> 
+          <%= link_to 'Users', users_path %>
+
+          <div class="dropdown", style="float:right" >
+            <% swap_count = Swap.where(other_id: current_user, status: "pending").count %>
+            <% comment_count = Comment.where(book_id: current_user.books, status: "unapproved").count %>
+
+            <button class="dropbtn">
+              Notifications 
+              <% if swap_count > 0 || comment_count >0 %>
+                <span class="badge"><%= [swap_count,comment_count].sum %></span>
+              <% end %>
+              <i class="fa fa-caret-down"></i>
+            </button>
+            
+            <div class="dropdown-content">
+              <%= link_to swap_count.to_s+" Swaps", user_notifications_index_path %>
+              <%= link_to comment_count.to_s+" Comments", dashboard_path %>
+            </div>
+          
+            
+          </div>
+
+          <li style="padding-left:2em; width:20em; height:3em; border-radius: 4px;">
+            <%= form_tag search_path(:search), :style => "height:2.2em; margin: 6px;", :method => 'get' do %>
+              <%= text_field_tag :search, params[:search] , placeholder: "Book", :style => "height:1.8em; border-radius: 4px;"%>
+              <%= submit_tag "Search", :name => nil , :class =>"btn btn-info" , :style => "visibility:hidden; height:0px; width:0px;margin-top:0px"%>
+            <% end %>
+          </li>
+
+        </div>
+
+      <% else %>
+        <li class="active"><%= link_to 'SWAP BOOK', root_path %></li>
+        <li style="float:right"><%= link_to "Sign up", new_user_registration_path %></li>
+        <li style="float:right"><%= link_to "Login", new_user_session_path %></li>
+      <% end %>
+     
+    </ul>
+
+    <% if flash[:notice] %>
+      <div class="alert alert-info">
+        <button class="close" data-dismiss="alert">x</button>
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    
+    <% if flash[:success] %>
+      <div id="flash-messages-section", class="alert alert-success">
+        <button class="close" data-dismiss="alert">x</button>
+        <%= flash[:success] %>
+      </div>
+    <% end %>
+    
+    <% if flash[:alert] %>
+      <div class="alert alert-error">
+        <button class="close" data-dismiss="alert">x</button>
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+    
+    <%= yield %>
+  </body>
+  
+</html>

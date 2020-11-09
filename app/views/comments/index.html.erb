@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="large-8 large-centered columns">
+    <br>
+    <h2>Comments for the book titled: <%= @book.title %></h2>
+    <hr>
+    <h3>Moderation table</h3>
+    <%= form_tag approve_book_comments_path, method: :put do %>
+      <table class="styled-table">
+        <tr>
+          <th></th>
+          <th>User Name</th>
+          <th>Title</th>
+          <th>Comment</th>
+          <th>Status</th>
+        </tr>
+
+        <% @book.comments.unapproved.each do |comment| %>
+          <tr>
+            <td><%= check_box_tag "comment_ids[]", comment.id %></td>
+            <td><%= comment.try(:user).try(:user_name) %></td>
+            <td><%= comment.title %> </td>
+            <td><%= comment.content %></td>
+            <td><%= comment.status%></td>
+          
+          </tr>
+        <% end %>
+      </table>
+      <%= submit_tag "Approve Comments", class: 'button danger'%> 
+    <% end %>
+    <br>
+    <hr>
+
+    <h3>All Approved Comments</h3>
+    <table class="styled-table">
+      <tr>
+        <th>User Name</th>
+        <th>Title</th>
+        <th>Comment</th>
+        <th>Status</th>
+      </tr>
+
+      <% @book.comments.approved.each do |comment| %>
+        <tr>
+          <td><%= comment.try(:user).try(:user_name) %></td>
+          <td><%= comment.title %></td>
+          <td><%= comment.content %></td>
+          <td><%= comment.status%></td>
+        </tr>
+      <% end %>
+    </table>
+    <hr>
+  </div>
+</div>

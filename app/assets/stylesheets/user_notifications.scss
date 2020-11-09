@@ -1,0 +1,133 @@
+// Place all the styles related to the UserNotifications controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.page-header {
+  padding-bottom: 50px;
+  margin: 40px 0 50px;
+  border-bottom: 2px solid #eeeeee;
+}
+
+.row:before, .row:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+element.style {
+    margin: 1em 0 1em 0;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+.span3 {
+  width: 220px;
+}
+.span5 {
+  width: 280px;
+}
+.span7 {
+  width: 540px;
+}
+.span2 {
+  width: 140px;
+}
+[class*="span"] {
+  float: left;
+  min-height: 1px;
+  margin-left: 20px;
+}
+
+.well {
+  min-height: 40px;
+  padding: 19px;
+  margin-bottom: 30px;
+  background: linear-gradient(to left, #70f5cd, #ffd194);
+  border: 1px inset #e3e3e3;
+  background-color: #fcfcfc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+}
+
+a {
+  color: #0088cc;
+  text-decoration: none;
+}
+
+.profile_name {
+  color: #CEF0D4;
+  font-family: 'Rouge Script', cursive;
+  font-size: 40px;
+  font-weight: normal;
+  line-height: 10px;
+  margin: 0 0 5px;
+  text-align: center;
+  text-shadow: 1px 1px 2px #082b34;
+  padding-top: 0.5em;
+  padding-left: 1em;
+}
+
+.btn-success {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+  background-color: #5bb75b;
+  background-image: linear-gradient(to bottom, #62c462, #51a351);
+  background-repeat: repeat-x;
+  border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+}
+
+.btn-danger {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+  background-color: #da4f49;
+  background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
+  background-repeat: repeat-x;
+  border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+}
+div {
+  display: block;
+}
+
+.btn {
+  display: inline-block;
+  padding: 2px 6px;
+  margin-bottom: 0;
+  font-size: 10px;
+  line-height: 10px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 2px rgba(0,0,0,0.05);
+}
+a {
+  text-decoration: none;
+}
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 40%;
+}
+
+#customers th {
+  border: 1px solid #ddd;
+  padding: 25px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 10px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #f39c61;
+  color: white;
+}

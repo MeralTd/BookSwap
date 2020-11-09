@@ -1,0 +1,23 @@
+<% if  @book.try(:user).try(:email) != current_user.email %>
+  <%= form_for([@book, @comment], remote: true) do |f| %>
+    <br>
+    <h3><strong>YOUR THOUGHTS ABOUT THE BOOK</strong></h3>
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title, placeholder: 'Comment title' %> 
+    </p>
+    <p>
+      <%= f.label :content %><br>
+      <%= f.text_area :content, rows: 5, placeholder: 'Type your thoughts here...' %>
+    </p>
+    
+    <small><font color="gray">
+      Comments are moderated to ensure quality conversation. Your comment(s) will appear here when approved. 
+    </font></small> <br><br>
+
+    <%= f.submit "Book This Comment", class: "button small" %> 
+    <br>
+    <br>
+  <% end %>
+<% end %>
+

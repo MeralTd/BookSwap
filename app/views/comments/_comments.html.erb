@@ -1,0 +1,23 @@
+<% if  @book.try(:user).try(:email) == current_user.email %>
+  <br>  
+  <div class="large-6 large-centered columns">
+    <%= link_to "There are #{pluralize @comments.unapproved.size, ('new comments. Click to see the comments')}", book_comments_path(@book), class: "button alert small"%> <br>
+  </div> 
+  <br>  
+<% end %>
+
+<div class="large-6 large-centered columns panel">
+  <h2>COMMENTS</h2>
+  <% @comments.approved.each do |comment| %>
+    <font color="gray"><%= comment.try(:user).try(:user_name) %> about <%= time_ago_in_words(comment.created_at)%></font><br>
+    <em><%= comment.title %><%= simple_format(comment.content) %></em>
+    <hr>
+  <% end %>
+  <% @comments.unapproved.each do |comment| %>
+    <% if comment.try(:user).try(:email) == current_user.email %>
+      <font color="gray"><%= comment.try(:user).try(:user_name) %> about <%= time_ago_in_words(comment.created_at)%> - pending approval </font><br>
+      <em><%= comment.title %><%= simple_format(comment.content) %></em>
+      <hr>
+    <% end %>
+  <% end %>
+</div>

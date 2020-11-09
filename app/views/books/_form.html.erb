@@ -1,0 +1,63 @@
+<%= form_with(model: book, local: true) do |form| %>
+  <% if book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+
+      <ul>
+        <% book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "editbook" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :aouther %>
+    <%= form.text_field :aouther, class: "editbook" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pagecount %>
+    <%= form.number_field :pagecount %>
+  </div>
+
+  <div class="control-group">
+    <%= form.label "Status", class: 'control-label' %>
+    <div class="controls">
+      <%= form.select(:status_type, options_for_select([['Share', 'Share'], ['NotShare', 'NotShare']]), { include_blank: true }) %>
+    </div>
+  </div>
+  <br></br>
+
+  <div class="actions">
+    <%= form.submit :class=> 'btn info' %>
+  </div>
+<% end %>
+
+<style>
+
+.editbook, select {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=number] {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+</style>

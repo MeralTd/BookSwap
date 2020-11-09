@@ -1,0 +1,18 @@
+
+<div class= "center">
+  <h1>Editing Book</h1>
+
+  <%= render 'form', book: @book %>
+
+  <%= link_to '<button class="btn success">Show</button>'.html_safe, @book %>
+  <%= link_to '<button class="btn danger">Back</button>'.html_safe, books_path %>
+
+</div>
+
+<style>
+.center {
+  margin: 20px 35%;
+  width: 70%;
+  padding: 10px;
+}
+</style>

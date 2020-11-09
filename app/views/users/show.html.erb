@@ -1,0 +1,26 @@
+<div class='content-wrapper'>
+  <h1 class='content-title'><%= @user.user_name.upcase + "'S" %> PROFILE</h1>
+
+  <div class='user-profile-information-wrapper'>
+    <div class='user-profile-image'></div>
+    <div class='user-profile-information'>
+      <div class='profile-information-line'>User Name: <%= @user.user_name %></div>
+      <div class='profile-information-line'>E-mail: <%= @user.email %></div>
+    </div>
+  </div>
+
+  <h1>Book List</h1>
+
+  <div class="flex-container">
+    <% @books.each do |book| %>
+
+      <div class="four columns book-tile">
+
+        <h4><%= book.title %></h4>
+        <p>Author: <%= book.aouther %></p>
+        <p><%= book.pagecount %></p>
+        <p><button class="button warning"><%= link_to 'Show', book %></button></p>
+      </div>
+    <% end %>
+  </div>
+</div>

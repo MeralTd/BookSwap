@@ -1,0 +1,63 @@
+
+<head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <% if user_signed_in? %>
+    <h1>Shared Books</h1>
+   
+    <div class="flex-container">
+      <% @books.each do |book| %>
+
+        <div class="four columns book-tile">
+
+          <h4><%= book.title %></h4>
+          <p>Author: <%= book.aouther %></p>
+          <p><%= book.pagecount %></p>
+          <p>User Name: <%= book.try(:user).try(:user_name) %></p>
+          <p><button class="button warning"><%= link_to 'Show', book %></button></p>
+
+          <% if !current_user.books.include?(book) %>
+            <div style="padding-top:1em;">
+              <%= form_tag swaps_path(book, :other_book) , :method => :post  do %>
+                <%= select_tag :other_book, options_from_collection_for_select(current_user.books.where(:status_type => 'Share'), "id", "title") %>
+                </br>
+                <input type="submit" value="Request Trade" class="button info">
+              <% end %>
+              </br>
+              <% if book.swaps_count>0 %>
+                <span style="color:#468847;">Swapped <%= book.swaps_count %> times</span>
+              <% else %>
+                <span style="color:#3a87ad;">Never Swapped</span>
+              <% end %>
+            </div>
+        <% end %>
+        </div>
+
+           
+          
+      <% end %>
+    </div>
+  <% else %>
+
+    <h1>Welcome to the Book Sharing Platform</h1>
+    <p><b>Today is </b><%= @date %> and <b>time is </b><%= @time %></p>
+    <p>You can share the books you want with others on this platform.</p>
+    <p>You can choose and read any of the shared books.</p>
+    <br>
+    <div class="flex-container">
+    <% @books.each do |book| %>
+
+      <div class="four columns book-tile">
+
+        <h4><%= book.title %></h4>
+        <p>Author: <%= book.aouther %></p>
+        <p><%= book.pagecount %></p>
+        <p>User Name: <%= book.try(:user).try(:user_name) %></p>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+</body>

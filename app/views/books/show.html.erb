@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+<head>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<p>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</p>
+
+<p>
+  <strong>Aouther:</strong>
+  <%= @book.aouther %>
+</p>
+
+<p>
+  <strong>Pagecount:</strong>
+  <%= @book.pagecount %>
+</p>
+
+<p>
+  <strong>User Name:</strong>
+  <%= @book.try(:user).try(:user_name) %>
+</p>
+
+<p>
+  <strong>Tradable Status:</strong>
+  <%= @book.status_type %>
+</p>
+
+
+<body>
+
+  <% if @book.try(:user).try(:email) === current_user.email %>
+    <%= link_to '<button class="btn warning">Edit</button>'.html_safe, edit_book_path(@book) %>
+    <%= link_to '<button class="btn danger">Back</button>'.html_safe, root_path %>
+  <% else %>
+    <%= link_to '<button class="btn danger">Back</button>'.html_safe, root_path %>
+  <% end %>
+  <%= yield %>
+</body>
+
+
+<div class="row">
+  <div class="large-6 large-centered columns">
+    <%= render "comments/form" %>
+  </div>
+   <%= render "comments/comments" %>
+</div>

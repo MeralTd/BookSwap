@@ -1,0 +1,146 @@
+<div class="contain">
+  <div class="wrapper">
+      <h2>Edit <%= resource_name.to_s.humanize %></h2>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <p>
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "edit"%>
+        </p>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <p>
+          <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+          <%= f.password_field :password, autocomplete: "new-password" , class: "edit"%>
+          <% if @minimum_password_length %>
+            <br />
+            <em><%= @minimum_password_length %> characters minimum</em>
+          <% end %>
+        </p>
+
+        <p>
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "edit" %>
+        </p>
+        <p>
+          <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "edit" %>
+        </p>
+        <p>
+          <%= f.label :user_name %><br />
+          <%= f.text_field :user_name, autofocus: true, class: "edit" %>
+        </p>
+        <%= f.submit "Update", :class => 'btn warning' %>
+      <% end %>
+  
+      <p>Cancel my account</p>
+  
+      <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, :class => 'btn default'  %></p>
+  
+      <%= link_to '<button class="btn danger">Back</button>'.html_safe, :back %>
+  </div>
+</div>
+
+<style>
+  /**************************************/
+  @media (min-width: 700px) {
+    .wrapper {
+      overflow: hidden;
+    }
+    .wrapper > * {
+      float: left;
+      padding: 2em 2em;
+    }
+  }
+
+  @media (min-width: 700px) {
+    .contacts {
+      width: 30%;
+      min-height: 620px;
+    }
+  }
+
+  @media (min-width: 700px) {
+    .form {
+      width: 70%;
+    }
+  }
+
+  form p {
+    float: left;
+    width: 49%;
+  }
+  form p:not(:nth-child(2n)) {
+    margin-right: 2%;
+  }
+  form p:last-child {
+    clear: both;
+    width: 100%;
+  }
+  form p:nth-last-child(2) {
+    clear: both;
+    width: 100%;
+  }
+
+
+  .wrapper {
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  }
+  .wrapper > * {
+    padding: 1em;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .contacts {
+    background: #4b5195;
+    color: #fff;
+  }
+
+  .form {
+    background: #fff;
+  }
+
+  form label {
+    display: block;
+  }
+
+  .contain {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
+  }
+  @media (min-width: 600px) {
+    .contain {
+      padding: 20px;
+    }
+  }
+
+  h3,
+  ul {
+    margin: 0;
+  }
+
+  h3 {
+    margin-bottom: 1rem;
+  }
+
+  .edit:focus{
+    outline: 3px solid gold;
+  }
+
+  .edit{
+    width: 100%;
+    border: 1px solid #000;
+    padding: 1em;
+    box-sizing: border-box;
+
+  }
+</style>
