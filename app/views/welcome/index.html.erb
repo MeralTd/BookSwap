@@ -22,7 +22,7 @@
           <% if !current_user.books.include?(book) %>
             <div style="padding-top:1em;">
               <%= form_tag swaps_path(book, :other_book) , :method => :post  do %>
-                <%= select_tag :other_book, options_from_collection_for_select(current_user.books.where(:status_type => 'Share'), "id", "title") %>
+                <%= select_tag :other_book, options_from_collection_for_select(current_user.books.where(:status_type => 'share'), "id", "title") %>
                 </br>
                 <input type="submit" value="Request Trade" class="button info">
               <% end %>

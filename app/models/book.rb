@@ -2,6 +2,9 @@ class Book < ApplicationRecord
   validates :title, presence: true
   validates :aouther, presence: true
 
+  enum status_type: {share: "share", not_share: "not_share"}
+
+
   has_many :comments
   belongs_to :user
 
@@ -12,8 +15,6 @@ class Book < ApplicationRecord
   def swaps_count
     count = Swap.where(book_id: self.id, status:"accepted").count + Swap.where(other_book_id: self.id, status: "accepted").count
   end
-
-  
 
   def self.search(search)
     where("title LIKE ?", "%#{search}%") 

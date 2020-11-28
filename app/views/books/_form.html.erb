@@ -29,7 +29,7 @@
   <div class="control-group">
     <%= form.label "Status", class: 'control-label' %>
     <div class="controls">
-      <%= form.select(:status_type, options_for_select([['Share', 'Share'], ['NotShare', 'NotShare']]), { include_blank: true }) %>
+      <%= form.select(:status_type, Book.status_types.keys.map {|role| [role.humanize,role]}) %>
     </div>
   </div>
   <br></br>

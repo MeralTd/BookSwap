@@ -12,7 +12,7 @@ class BooksController < ApplicationController
 
   # GET /books/1.json
   def show
-    @books = Book.where(:status_type => 'Share',user_id: params[:user_id]).all
+    @books = Book.where(:status_type => 'share',user_id: params[:user_id]).all
     @comments = @book.comments
     @comment = Comment.new
   end

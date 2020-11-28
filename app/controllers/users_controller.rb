@@ -5,6 +5,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
-    @books = Book.where(:status_type => 'Share',user_id: params[:user_id]).all
+    @books = Book.where(:status_type => 'share',user_id: params[:user_id]).all
   end
 end
