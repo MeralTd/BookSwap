@@ -45,6 +45,47 @@
 
 <div class="page-header">
     <div class="row">
+        <div class="span6">
+            <div class="profile_name">My Swap Request</div>
+        </div>
+    </div>
+</div>
+
+<% if @user_swap_requests %>
+    <table id="customers">
+        <thead>
+            <tr>
+                <th>Your Book</th>
+                <th>Requested Book</th>
+                <th>Suggested By</th>
+            </tr>
+        </thead>
+    </table>
+    <% @user_swap_requests.each do |swap| %>
+            <div class="row well" style="margin: 1em 0 1em 0;">
+                <div class="span2">
+                    <%= link_to "#{Book.find(swap.other_book_id).title}", book_path(swap.other_book_id) %>
+                </div>
+                <div class="span2">
+                    <%= link_to "#{Book.find(swap.book_id).title}", book_path(swap.book_id) %>
+                </div>
+                
+                <div class="span4">
+                    <div style="white-space:nowrap">
+                        <span class="label label-info">Suggested By: </span>
+                        <strong><%= link_to User.find(swap.other_id).user_name , user_profile_path(User.find(swap.user_id).user_name) %></strong>
+                    </div>
+                </div>
+                <div class="span2">
+                    <%= link_to "Decline", swap_declined_path(swap), class:"btn btn-danger" %>
+                </div>
+
+            </div>
+    <% end %>
+<% end %>
+
+<div class="page-header">
+    <div class="row">
         <div class="span5">
             <div class="profile_name">Your Swaps</div>
         </div>
@@ -65,17 +106,17 @@
     <% @swaps_other.each do |swap| %>
         <div class="row well" style="margin: 1em 0 1em 0;">
             <div class="span2">
-                    <%= link_to Book.find(swap.book_id).title, book_path(swap.book_id) %>
+                <%= link_to Book.find(swap.book_id).title, book_path(swap.book_id) %>
+            </div>
+            <div class="span2">
+                <%= link_to Book.find(swap.other_book_id).title, book_path(swap.other_book_id) %>
+            </div>
+            <div class="span4">
+                <div style="white-space:nowrap">
+                    <span class="label label-info">Swapped with: </span>
+                    <strong><%= link_to User.find(swap.user_id).user_name , user_profile_path(User.find(swap.user_id).id) %></strong>
                 </div>
-                <div class="span2">
-                    <%= link_to Book.find(swap.other_book_id).title, book_path(swap.other_book_id) %>
-                </div>
-                <div class="span4">
-                    <div style="white-space:nowrap">
-                        <span class="label label-info">Swapped with: </span>
-                        <strong><%= link_to User.find(swap.user_id).user_name , user_profile_path(User.find(swap.user_id).id) %></strong>
-                    </div>
-                </div>
+            </div>
         </div>
     <% end %>
 <% end %>
@@ -89,14 +130,13 @@
             <div class="span2">
                 <%= link_to Book.find(swap.other_book_id).title, book_path(swap.other_book_id) %>
             </div>
-            <div class="span4">
+            <div class="span2">
                 <div style="white-space:nowrap">
                     <span class="label label-info">Swapped with: </span>
                     <strong><%= link_to User.find(swap.other_id).user_name , user_profile_path(User.find(swap.other_id).user_name) %></strong>
                 </div>
-                
             </div>
-            <div class="footer_text"><%= time_ago_in_words(swap.created_at)+" ago." %></div>
+            <div class="span2"><%= time_ago_in_words(swap.created_at)+" ago." %></div>
         </div>
     <% end %>
 <% end %>
