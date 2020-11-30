@@ -1,5 +1,18 @@
 <% if  @book.try(:user).try(:email) != current_user.email %>
-  <%= form_for([@book, @comment], remote: true) do |f| %>
+  <%= form_for([@book, @comment], remote: false) do |f| %>
+    
+    <% if @comment.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+        <ul>
+          <% @comment.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <br>
     <h3><strong>YOUR THOUGHTS ABOUT THE BOOK</strong></h3>
     <p>
