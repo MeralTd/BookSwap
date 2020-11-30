@@ -14,8 +14,8 @@
         <div class="four columns book-tile">
 
           <h4><%= book.title %></h4>
-          <p>Author: <%= book.aouther %></p>
-          <p><%= book.pagecount %></p>
+          <p>Author: <%= book.author %></p>
+          <p>Page Count: <%= book.pagecount %></p>
           <p>User Name: <%= book.try(:user).try(:user_name) %></p>
           <p><button class="button warning"><%= link_to 'Show', book %></button></p>
 
@@ -53,8 +53,8 @@
       <div class="four columns book-tile">
 
         <h4><%= book.title %></h4>
-        <p>Author: <%= book.aouther %></p>
-        <p><%= book.pagecount %></p>
+        <p>Author: <%= book.author %></p>
+        <p>Page Count: <%= book.pagecount %></p>
         <p>User Name: <%= book.try(:user).try(:user_name) %></p>
       </div>
     <% end %>

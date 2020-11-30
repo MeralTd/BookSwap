@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
   validates :title, presence: true
-  validates :aouther, presence: true
+  validates :author, presence: true
 
   enum status_type: {share: "share", not_share: "not_share"}
 
