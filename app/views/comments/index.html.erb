@@ -14,7 +14,7 @@
           <th>Status</th>
         </tr>
 
-        <% @book.comments.unapproved.each do |comment| %>
+        <% @unapproved_comment.each do |comment| %>
           <tr>
             <td><%= check_box_tag "comment_ids[]", comment.id %></td>
             <td><%= comment.try(:user).try(:user_name) %></td>
@@ -39,7 +39,7 @@
         <th>Status</th>
       </tr>
 
-      <% @book.comments.approved.each do |comment| %>
+      <% @approved_comment.each do |comment| %>
         <tr>
           <td><%= comment.try(:user).try(:user_name) %></td>
           <td><%= comment.title %></td>

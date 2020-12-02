@@ -41,8 +41,8 @@
     <br>
     <% @books.each do |book| %>
       <% if  book.try(:user).try(:email) == current_user.email %>
-        <% book.comments.unapproved.each do |comment| %>
-          <%= link_to "#{comment.try(:user).try(:user_name)} wrote a comment your #{comment.try(:book).try(:title)} book. Click here to accept it", book_comments_path(book), class: "button alert small"%> <br>
+        <% book.comments.unapproved.includes(:user).each do |comment| %>
+          <%= link_to "#{comment.user.user_name} wrote a comment your #{comment.book.title} book. Click here to accept it", book_comments_path(book), class: "button alert small"%> <br>
         <% end %>
       <% end %>
     <% end %>

@@ -1,7 +1,9 @@
 class CommentsController < ApplicationController
     def index
       @book = Book.find(params[:book_id])
-      @comments = @book.comments.all
+      @comments = @book.comments.includes(:user).all
+      @approved_comment = @book.comments.approved.includes(:user).all
+      @unapproved_comment = @book.comments.unapproved.includes(:user).all
     end
 
     def new

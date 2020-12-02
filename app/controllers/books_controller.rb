@@ -13,7 +13,8 @@ class BooksController < ApplicationController
   # GET /books/1.json
   def show
     @books = Book.where(:status_type => 'share',user_id: params[:user_id]).all
-    @comments = @book.comments
+    @comments = @book.comments.includes(:user).all
+    @unapproved_comment = @book.comments.unapproved.includes(:user).all
     @comment = Comment.new
   end
 
