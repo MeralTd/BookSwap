@@ -1,7 +1,6 @@
 class WelcomeController < ApplicationController
   def index
     if current_user
-      @books = Book.where(:status_type => 'share').all
       if params[:search]
         puts params[:search]
         @books = Book.where(:status_type => 'share').search(params[:search]).order("created_at DESC")
@@ -9,9 +8,8 @@ class WelcomeController < ApplicationController
         if @books
           render action: :results
         end
-      else
-        @books = Book.where(:status_type => 'share').all.order('created_at DESC')
       end
+      @books = Book.includes(:user).where(:status_type => 'share').all.order('created_at DESC')
     else
       @books = Book.includes(:user).where(:status_type => 'share').all
       time = Time.now
@@ -22,7 +20,6 @@ class WelcomeController < ApplicationController
 
   def dashboard
     @books = current_user.books
-
   end
   
 end
