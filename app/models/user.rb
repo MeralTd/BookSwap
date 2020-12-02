@@ -14,7 +14,7 @@ class User < ApplicationRecord
     end
   end
   has_many :books
-  has_many :commentscd
+  has_many :comments
   has_many :swaps
 
 
