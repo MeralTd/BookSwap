@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
         @books = Book.where(:status_type => 'share').all.order('created_at DESC')
       end
     else
-      @books = Book.where(:status_type => 'share').all
+      @books = Book.includes(:user).where(:status_type => 'share').all
       time = Time.now
       @date = time.strftime("%Y-%m-%d")
       @time = time.strftime("%H:%M:%S")
